@@ -1,14 +1,14 @@
 import java.util.Scanner;
 import java.util.Random;
 
-class Numarr{//answer 배열을 중복해서 만들지 않게 해 주는 메소드
+class Numarr{
 	int strike = 0;
 	int ball = 0;
 	Scanner sc = new Scanner(System.in);
 	Random rd = new Random();
 	static int[] answer = new int[3]; 
 	
-	 private static boolean exists(int n[], int index) {
+	 private static boolean exists(int n[], int index) {//answer 배열을 중복해서 만들지 않게 해 주는 메소드
 	        for (int i = 0; i < n.length; i++) {
 	            if(n[i] == index)
 	                return true;
