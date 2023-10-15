@@ -1,4 +1,4 @@
-package com.week3;
+package com.calc;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class CalcView implements ActionListener{
+public class Calculator implements ActionListener{
 	JFrame jf = new JFrame();
 	JTextField jtf_display = new JTextField("0");
 	JPanel jp = new JPanel();
@@ -75,103 +75,53 @@ public class CalcView implements ActionListener{
 		jf.setVisible(true);
 	}
 	public static void main(String[] args) {
-		CalcView cv = new CalcView();
+		Calculator cv = new Calculator();
 		cv.initDisplay();
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
-		if("1".equals(command)) {//너 숫자 1 버튼 누른거야?
-			jtf_display.setText(jtf_display.getText()+"1");//숫자 버튼을 누르면 화면에 해당 수가 추가된다.
-		}
-		else if("2".equals(command)) {//너 숫자 2 버튼 누른거야?
-			jtf_display.setText(jtf_display.getText()+"2");			
-		}
-		else if("3".equals(command)) {//너 숫자 3 버튼 누른거야?
-			jtf_display.setText(jtf_display.getText()+"3");			
-		}
-		else if("4".equals(command)) {//너 숫자 4 버튼 누른거야?
-			jtf_display.setText(jtf_display.getText()+"4");			
-		}
-		else if("5".equals(command)) {//너 숫자 5 버튼 누른거야?
-			jtf_display.setText(jtf_display.getText()+"5");			
-		}
-		else if("6".equals(command)) {//너 숫자 6 버튼 누른거야?
-			jtf_display.setText(jtf_display.getText()+"6");			
-		}
-		else if("7".equals(command)) {//너 숫자 7 버튼 누른거야?
-			jtf_display.setText(jtf_display.getText()+"7");			
-		}
-		else if("8".equals(command)) {//너 숫자 8 버튼 누른거야?
-			jtf_display.setText(jtf_display.getText()+"8");			
-		}
-		else if("9".equals(command)) {//너 숫자 9 버튼 누른거야?
-			jtf_display.setText(jtf_display.getText()+"9");			
-		}
-		else if("0".equals(command)) {//너 숫자 0 버튼 누른거야?
-			jtf_display.setText(jtf_display.getText()+"0");			
-		}
-		else if("+".equals(command)) {//너 + 버튼 누른거야?
-			System.out.println("더하기 버튼");
-			firstVal = Double.parseDouble(jtf_display.getText());
-			jtf_display.setText("");
-			operator = "+";//연산자를 입력하면, 기존 수는 사라지고 그 수는 변수 firstval에 저장된다. 다음 수를 얻어 계산을 계속하기 위해
-		}
-		else if("-".equals(command)) {//너 + 버튼 누른거야?
-			System.out.println("빼기 버튼");
-			firstVal = Double.parseDouble(jtf_display.getText());
-			jtf_display.setText("");
-			operator = "-";
-		}
-		else if("/".equals(command)) {//너 + 버튼 누른거야?
-			System.out.println("더하기 버튼");
-			firstVal = Double.parseDouble(jtf_display.getText());
-			jtf_display.setText("");
-			operator = "/";
-		}
-		else if("*".equals(command)) {//너 + 버튼 누른거야?
-			System.out.println("더하기 버튼");
-			firstVal = Double.parseDouble(jtf_display.getText());
-			jtf_display.setText("");
-			operator = "*";
-		}
-		else if("=".equals(command)) {//너 = 버튼 누른거야?
-			System.out.println("계산 결과는 얼마");			
-			secVal = Double.parseDouble(jtf_display.getText());
-			if(operator.equals("+")) {
-			result = firstVal + secVal; }
-			else if(operator.equals("-")) {
-				result = firstVal - secVal;
-			}
-			else if(operator.equals("/")) {
-				result = firstVal/secVal;
-			}
-			else if(operator.equals("*")) {
-				result = firstVal*secVal;
-			}
-			
-			String sumStr = Double.toString(result);
-			jtf_display.setText(sumStr);
-      //첫 번째로 받은 firstval과 연산자 이후 받은 secval을, 연산자에 맞춰 계산한다.
-		}		
-		else if("<=".equals(command)) {//너 = 버튼 누른거야?
-			System.out.println("한글자씩 지우기 구현");		
-			String now = jtf_display.getText();
-			try {
-				String deleted = now.substring(0, now.length() - 1);
-				jtf_display.setText(deleted);
-				}
-			catch (ArrayIndexOutOfBoundsException e1) {
-				System.out.println("--ArrayIndexOutOfBoundsException 발생--");
-				System.out.println("기존 코드를 체크해 주세요!!");
-			}// 한 글자씩 기존 textbox에서 제거한다다
-			
-			
-		}
-		else if("C".equals(command)) {
-			System.out.println("클리어");		
-			jtf_display.setText("");
-		}
+	    if (Character.isDigit(command.charAt(0))) { // 숫자 버튼이 눌린 경우. 간결하게 변경하고 0만 있을 때 숫자를 뒤에 붙이지 않고 0을 제거함.
+	    	 String currentText = jtf_display.getText();
+	         if (currentText.equals("0")) {
+	             jtf_display.setText(command);
+	         } else {
+	             jtf_display.setText(currentText + command);
+	         }
+	    } else if ("+-*/".contains(command)) { // 연산자 버튼이 눌린 경우
+	        System.out.println(command + " 버튼");
+	        firstVal = Double.parseDouble(jtf_display.getText());
+	        jtf_display.setText("");
+	        operator = command;
+	    } else if ("=".equals(command)) { // 등호 버튼이 눌린 경우
+	        System.out.println("계산 결과는 얼마");
+	        secVal = Double.parseDouble(jtf_display.getText());
+	        switch (operator) {
+	            case "+":
+	                result = firstVal + secVal;
+	                break;
+	            case "-":
+	                result = firstVal - secVal;
+	                break;
+	            case "*":
+	                result = firstVal * secVal;
+	                break;
+	            case "/":
+	                result = firstVal / secVal;
+	                break;
+	        }
+	        jtf_display.setText(Double.toString(result));
+	    } else if ("<=".equals(command)) { // 지우기 버튼이 눌린 경우
+	        System.out.println("한 글자씩 지우기 구현");
+	        String now = jtf_display.getText();
+	        if (!now.isEmpty()) {
+	            String deleted = now.substring(0, now.length() - 1);
+	            jtf_display.setText(deleted);
+	        }
+	    } else if ("C".equals(command)) { // 클리어 버튼이 눌린 경우
+	        System.out.println("클리어");
+	        jtf_display.setText("");
+	    }
 	}
 
 }
