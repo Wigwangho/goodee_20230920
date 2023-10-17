@@ -1,0 +1,33 @@
+public void refreshData(String dong) {
+		List<Map<String,Object>> list = new ArrayList<>();
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT zipcode, address    ");
+		sql.append("  FROM zipcode_t           ");
+		sql.append(" WHERE dong LIKE ?||'%'");//SQL문 작성
+		dbMgr = DBConnectionMgr.getInstance();
+		try {
+			con = dbMgr.getConnection();//물리적으로 떨어져 있는 서버와 연결통로 확보
+			pstmt = con.prepareStatement(sql.toString());//쿼리문을 먼저 스캔하여 있을 지 모르는 변수의 자리를 치환할것.
+			pstmt.setString(1, dong);//dong, 당산, 가산, 공덕. ? 파라미터 부분에 들어가는 변수
+			rs = pstmt.executeQuery();
+			Map<String,Object> rmap = null;
+			while(rs.next()) {
+				rmap = new HashMap<>();
+				rmap.put("zipcode", rs.getInt("zipcode"));
+				rmap.put("address", rs.getString("address"));
+				list.add(rmap);
+			}
+			System.out.println(list);//주소번지가 33번 출력될것이다. - 단위테스트 하자
+			//메소드 설계가 리턴타입이 빠져 있으므로 화면 처리까지 여기서 해야 함.
+			for(int i=0;i<list.size();i++) {//33번 반복됨 - row수
+				Map<String, Object> map = list.get(i);
+				Vector<Object> v = new Vector<>();
+				v.add(0,map.get("zipcode"));
+				v.add(1,map.get("address"));
+				dtm_zipcode.addRow(v);
+			}
+		} catch (SQLException se) {
+			System.out.println(sql.toString());//출력된 쿼리문을 갈무리해서 토드에서 확인해 볼것.
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
