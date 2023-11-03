@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습 - 로그인</title>
+    <link rel="stylesheet" href="loginForm.css">
+    <script src="https://kit.fontawesome.com/c72d377fc9.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- 백그라운드 이미지 삽입을 위함 -->
+    <div class = "bg"></div>
+    <!-- 1. 폼태그 -->
+    <form action = "xxx.html", class = "login_form">
+        <h1>로그인</h1>
+        <!-- 단락처리 -->
+        <p>신규 사용자이신가요? <a href = "#">계정 만들기</a></p>
+        <label for = "useremail">
+            이메일 주소
+            <input type="email" id = "usermail" placeholder = "이메일 주소를 입력해 주세요">
+        </label>
+            <input type="submit" value="계속" class = "btn_submit">
+        <div class="divider">
+            <hr />
+            <span>또는</span>
+        </div>
+        <button class="btn_google">
+            <i class="fa-brands fa-google"></i> Google로 계속
+        </button>
+        <button class="btn_facebook">
+            <i class="fa-brands fa-facebook"></i> Facebook으로 계속
+        </button>
+    </form>
+</body>
+</html>
