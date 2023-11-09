@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>도서관리시스템 - html 활용 코드</title>
+</head>
+<body>
+
+  <button id="btnLogin">로그인</button>
+  <button id="btnLogout">로그아웃</button>
+  <script type="module">
+    import  {firebaseApp}  from "../service/firebase.js";
+    import {getAuth, } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+    import AuthLogic from "../service/authLogic.js";
+    import {loginGoogle, logout} from "../service/authLogic.js";
+    const auth = getAuth(firebaseApp);
+    console.log(auth);
+    //authLogic.js에서 구현한 클래스를 인스턴스화 하기
+    const authLogic = new AuthLogic();
+    const loginbtn = document.querySelector("#btnLogin");
+    loginbtn.addEventListener('click', (e)=>{
+      loginGoogle(auth, authLogic.googleProvider);
+      console.log('login complete');
+})
+  const logoutbtn = document.querySelector('#btnLogout');
+  logoutbtn.addEventListener('click', (e)=>{
+      logout(auth);
+      
+})
+   
+    //객체생성이 되었으니까 전변을 호출할 수 있다.
+    //console.log(authLogic.googleProvider);
+    //console.log(authLogic['googleProvider']);
+   </script>
+
+
+
+  
+  </script>
+</body>
+</html>
