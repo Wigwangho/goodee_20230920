@@ -1,0 +1,54 @@
+1-1에서 변경해 볼 것들....
+
+1. Action이라는 인터페이스 이름을 스프링 레거시에서 사용되는 Controller이름으로 변경해 본다
+
+2. FrontMVC라는 이름에서 ActionServlet이름으로 변경해 본다
+스프링에서 사용하는 응답 객체 String으로 사용해 본다
+
+ViewResolver지원함
+upmu[]
+pageMove[]
+Object수렴하는 설계
+ModelAndView설계 -  model계층 광고
+String - text/plain
+json - application/json
+
+1)redirect:./noticeList.jsp
+
+2)forward:./noticeList.jsp
+
+3)/WEB-INF/jsp/notice/noticeList.jsp
+
+3. 클래스 갯수를 늘린다 BoardDao.java
+BoardController.java
+BoardLogic.java
++
+BoardDao.java => 모델계층 : XXXDao패턴 포함됨 - 퍼시스턴스 계층
+BoardVO.java
+
+4. 페이지 네비게이션 처리실습
+
+
+POJO -> 스프링 컨테이너(레거시-5.0) -> 스프링 부트
+
+데이터 영속성지원하는 코드
+
+분석단계
+1. before(AS-IS) - 업무분석, 데이터분석, 요구사항정의
+
+2.after(TO-BE) - 방향수립
+
+
+설계단계
+개념모델링 - 주제영역 정의, 핵심 엔티티 정의
+논리모델링 - 엔티티정의, 관계정의, 속성 정의
+물리모델링 - 테이블설계, 무결성 설계, 인덱스 설계
+
+왜 XXXDao클래스를 추가하는가?
+
+JPA(Java Persistence API)란?
+
+ORM Framework - Hibernate
+myBatis -> HIbernate
+:객체와 DB테이블 간의 연결을 해주는 프레임워크
+: 객체모델과 관계형 모델의 차이를 해소하기
